@@ -22,6 +22,63 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        /* Instagram gradient flash (every 10s) */
+        @keyframes instaFlash {
+
+            0%,
+            86% {
+                opacity: 0;
+            }
+
+            90%,
+            93% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .insta-flash {
+            position: relative;
+            overflow: hidden;
+            /* keeps the glow inside the pill */
+            isolation: isolate;
+            /* ensures ::after sits beneath the icon nicely */
+        }
+
+        .insta-flash::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+            opacity: 0;
+            z-index: 0;
+            animation: instaFlash 10s infinite;
+        }
+
+        .insta-flash:hover::after {
+            opacity: 1;
+        }
+
+        /* looks nice on hover too */
+        .insta-flash>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* keep icon above gradient */
+
+        /* Optional: square-ish sizing helper for icon-only pills (matches your current paddings) */
+        .icon-pill {
+            padding: 0.65rem 0.75rem;
+        }
+
+        /* tweak if you want a perfect circle */
+
+
         :root {
             --brand-900: #1f1b16;
             /* espresso */
@@ -219,6 +276,7 @@
                 style="animation: fadeInUp .6s ease-out both; animation-delay: .08s;">
                 <h2 class="text-[28px] font-bold font-['DIN_2014',sans-serif]">Your neighborhood café</h2>
                 <p class="text-[13px] text-brand-900/70 mt-1.5">Freshly roasted, baked daily, served with care.</p>
+                <!--   View Menu & Order Ahead Buttons 
                 <div class="mt-3 flex items-center gap-2">
                     <a data-go-menu="" href="#menu"
                         class="inline-flex items-center gap-1.5 rounded-full bg-brand-900 text-white px-3.5 py-2 text-[12px] font-semibold shadow-sm hover:opacity-90 focus:outline-none focus-visible:ring-2 ring-brand-200">
@@ -230,49 +288,29 @@
                         <i data-lucide="phone-call" class="h-3.5 w-3.5"></i>
                         Order ahead
                     </a>
+                </div> -->
+                <!-- Quick Highlights -->
+                <div class="grid grid-cols-2 gap-3 mt-5"
+                    style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
+                    <!-- Free Wi-Fi -->
+                    <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="wifi" class="h-4 w-4"></i>
+                            <p class="text-[13px] font-semibold">Free Wi-Fi</p>
+                        </div>
+                        <p class="text-[12px] text-brand-900/70 mt-1">Settle in and stay awhile.</p>
+                    </div>
+
+                    <!-- Good Music -->
+                    <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="music" class="h-4 w-4"></i>
+                            <p class="text-[13px] font-semibold">Good Music</p>
+                        </div>
+                        <p class="text-[12px] text-brand-900/70 mt-1">Relax with curated playlists.</p>
+                    </div>
                 </div>
             </div>
-
-
-
-            <style>
-                /* hide scrollbar for the media strip (optional) */
-                .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
-                }
-
-                .scrollbar-hide {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
-            </style>
-
-
-
-            <style>
-                /* hide scrollbar for the media strip (optional) */
-                .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
-                }
-
-                .scrollbar-hide {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
-            </style>
-
-
-            <style>
-                /* hide scrollbar for the media strip (optional) */
-                .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
-                }
-
-                .scrollbar-hide {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
-            </style>
 
             <!-- HERO: Jubilee Hills -->
             <section
@@ -296,26 +334,30 @@
                     <h3 class="text-[16px] font-semibold">mikro | Jubilee Hills</h3>
                     <div class="mt-1 text-[12px] text-brand-900/70 flex items-center gap-2">
                         <span class="inline-flex items-center gap-1.5">
-                            <i data-lucide="circle" class="h-3 w-3 text-emerald-500"></i> Open
+                            <i data-lucide="circle" class="h-2 w-2 text-emerald-500"></i> Open
                         </span>
                         <span class="text-brand-900/30">•</span>
                         <span>Closes 11 pm</span>
                     </div>
 
-                    <!-- Pill actions row -->
-                    <div class="mt-3 flex justify-center gap-2">
+                    <!-- Pill actions row (scrollable) -->
+                    <div class="mt-3 flex gap-1.5 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-1">
                         <a href="tel:+91XXXXXXXXXX"
-                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200 snap-start">
                             <i data-lucide="phone" class="h-4 w-4"></i> Call
                         </a>
                         <a href="https://www.google.com/maps/search/?api=1&query=mikro+Jubilee+Hills" target="_blank"
                             rel="noopener"
-                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200 snap-start">
                             <i data-lucide="map" class="h-4 w-4"></i> Directions
                         </a>
                         <a href="#"
-                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200 snap-start">
                             <i data-lucide="utensils" class="h-4 w-4"></i> Order Ahead
+                        </a>
+                        <a href="https://g.page/r/XXXXXX/review" target="_blank" rel="noopener"
+                            class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200 snap-start">
+                            <i data-lucide="star" class="h-4 w-4"></i> Leave a Review
                         </a>
                     </div>
                 </div>
@@ -341,30 +383,77 @@
                     <h3 class="text-[16px] font-semibold">mikro | Sainikpuri</h3>
                     <div class="mt-1 text-[12px] text-brand-900/70 flex items-center gap-2">
                         <span class="inline-flex items-center gap-1.5">
-                            <i data-lucide="circle" class="h-3 w-3 text-emerald-500"></i> Open
+                            <i data-lucide="circle" class="h-2 w-2 text-emerald-500"></i> Open
                         </span>
                         <span class="text-brand-900/30">•</span>
                         <span>Closes 11 pm</span>
                     </div>
 
-                    <!-- Pill actions row -->
-                    <div class="mt-3 flex justify-center gap-2">
+                    <!-- Pill actions row (scrollable) -->
+                    <div class="mt-3 flex gap-1.5 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-1">
                         <a href="tel:+91YYYYYYYYYY"
-                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200 snap-start">
                             <i data-lucide="phone" class="h-4 w-4"></i> Call
                         </a>
                         <a href="https://www.google.com/maps/search/?api=1&query=mikro+Sainikpuri" target="_blank"
                             rel="noopener"
-                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200 snap-start">
                             <i data-lucide="map" class="h-4 w-4"></i> Directions
                         </a>
                         <a href="#"
-                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200 snap-start">
                             <i data-lucide="utensils" class="h-4 w-4"></i> Order Ahead
+                        </a>
+                        <a href="https://g.page/r/YYYYYY/review" target="_blank" rel="noopener"
+                            class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200 snap-start">
+                            <i data-lucide="star" class="h-4 w-4"></i> Leave a Review
                         </a>
                     </div>
                 </div>
             </section>
+
+
+
+            <style>
+                /* hide scrollbar for the media strip (optional) */
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            </style>
+
+
+
+            <style>
+                /* hide scrollbar for the media strip (optional) */
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            </style>
+
+
+            <style>
+                /* hide scrollbar for the media strip (optional) */
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            </style>
+
+
 
             <style>
                 /* hide scrollbar for the media strip (optional) */
@@ -417,45 +506,6 @@
                 }
             </style>
 
-
-            <!-- Quick Highlights -->
-            <div class="grid grid-cols-2 gap-3" style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
-                <!-- Free Wi-Fi -->
-                <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="wifi" class="h-4 w-4"></i>
-                        <p class="text-[13px] font-semibold">Free Wi-Fi</p>
-                    </div>
-                    <p class="text-[12px] text-brand-900/70 mt-1">Settle in and stay awhile.</p>
-                </div>
-
-                <!-- Good Music -->
-                <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="music" class="h-4 w-4"></i>
-                        <p class="text-[13px] font-semibold">Good Music</p>
-                    </div>
-                    <p class="text-[12px] text-brand-900/70 mt-1">Relax with curated playlists.</p>
-                </div>
-
-                <!-- Homey Experience -->
-                <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="home" class="h-4 w-4"></i>
-                        <p class="text-[13px] font-semibold">Homey Experience</p>
-                    </div>
-                    <p class="text-[12px] text-brand-900/70 mt-1">Warm and welcoming atmosphere.</p>
-                </div>
-
-                <!-- Friendly Staff -->
-                <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="smile" class="h-4 w-4"></i>
-                        <p class="text-[13px] font-semibold">Friendly Staff</p>
-                    </div>
-                    <p class="text-[12px] text-brand-900/70 mt-1">Service with a smile, always.</p>
-                </div>
-            </div>
 
         </section>
 
