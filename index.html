@@ -1,0 +1,742 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>mikro — Mobile</title>
+    <meta name="theme-color" content="#1f1b16">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Preload hero images -->
+    <link rel="preload" as="image" href="Assets/images/mikro-food-1.jpeg">
+    <link rel="preload" as="image" href="Assets/images/mikro-at-night.jpg">
+    <link rel="preload" as="image" href="Assets/images/mikro-holding-cup-2.jpg">
+    <link rel="preload" as="image" href="Assets/images/mikro-story.webp.jpg">
+    <link rel="preload" as="image" href="Assets/images/mikro-food-3.jpg">
+    <link rel="preload" as="image" href="Assets/images/mikro-food-2.jpg">
+
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --brand-900: #1f1b16;
+            /* espresso */
+            --brand-700: #2a241e;
+            --brand-500: #5a4a3a;
+            /* mocha */
+            --accent: #d4a373;
+            /* caramel */
+            --cream: #f6efe7;
+            /* warm cream */
+            --cream-50: #faf6f1;
+        }
+
+        /* Brand utilities */
+        .bg-brand-900 {
+            background: var(--brand-900);
+        }
+
+        .text-brand-900 {
+            color: var(--brand-900);
+        }
+
+        .border-brand-200 {
+            border-color: rgba(31, 27, 22, .15);
+        }
+
+        .ring-brand-200 {
+            --tw-ring-color: rgba(31, 27, 22, .15);
+        }
+
+        .hover\:bg-cream-50:hover {
+            background: var(--cream-50);
+        }
+
+        .bg-cream {
+            background: var(--cream);
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .bg-accent {
+            background: var(--accent);
+        }
+
+        /* Fonts */
+        .font-brand {
+            font-family: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+        }
+
+        .font-heading {
+            font-family: 'Playfair Display', ui-serif, Georgia, Cambria, Times New Roman, Times, serif;
+        }
+
+        @font-face {
+            font-family: 'DIN 2014';
+            src: url('./Assets/fonts/DIN2014-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'DIN Alternate';
+            src: url('./Assets/fonts/DIN-alternate-bold.woff2') format('woff2');
+            font-weight: 900;
+            /* Bold */
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Micro animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(.985);
+                filter: blur(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(8px)
+            }
+
+            to {
+                transform: translateY(0)
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-cream text-brand-900 antialiased font-brand min-h-screen flex flex-col items-center selection:bg-brand-900 selection:text-white">
+    <main class="w-full max-w-sm px-4 pt-5 pb-28 space-y-5">
+        <!-- Top bar -->
+        <header class="flex items-center justify-between relative z-50"
+            style="animation: fadeInUp .6s ease-out both; animation-delay: .02s;">
+            <div class="flex items-center gap-2">
+                <!-- Logo: m. centered in a circle -->
+                <div>
+                    <img src="./Assets/logo/mikro-m-circle-white-on-black.svg" alt="mikro logo" class="h-10">
+                </div>
+                <div>
+                    <img src="./Assets/logo/mikro-logo-black.svg" alt="mikro logo" class="h-5">
+                    <p class="text-[12px] text-brand-900/70 mt-1">Coffee & a nice vibe!</p>
+                </div>
+            </div>
+            <nav class="flex items-center gap-[3px]">
+                <a href="tel:+91 8801506263"
+                    class="inline-flex items-center gap-1.5 rounded-full border border-brand-200 bg-white px-3.5 py-[0.65rem] text-[12px] font-semibold text-brand-900 shadow-sm hover:shadow transition-all hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 ring-brand-200"
+                    style="animation: fadeInUp .6s ease-out both; animation-delay: .08s;">
+                    <i data-lucide="phone" class="h-3.5 w-3.5"></i>
+                </a>
+
+                <!-- Directions dropdown -->
+                <div class="relative" style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
+                    <button type="button" data-dropdown-toggle="locationsMenu"
+                        class="inline-flex items-center gap-1.5 rounded-full border border-brand-200 bg-white px-3.5 py-2 text-[12px] font-semibold text-brand-900 shadow-sm hover:shadow transition-all hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 ring-brand-200">
+                        <i data-lucide="map-pin" class="h-3.5 w-3.5"></i>
+                        Directions
+                        <i data-lucide="chevron-down" class="h-3.5 w-3.5"></i>
+                    </button>
+                    <div id="locationsMenu"
+                        class="absolute right-0 z-50 mt-1 w-52 overflow-hidden rounded-xl border border-brand-200 bg-white shadow-lg shadow-black/10 hidden">
+                        <!-- inside: <div id="locationsMenu" ...> -->
+                        <a href="https://www.google.com/maps/search/?api=1&query=mikro+Jubilee+Hills" target="_blank"
+                            data-location="jubilee"
+                            class="flex flex-col gap-0.5 px-3 py-2.5 text-[13px] text-brand-900 hover:bg-cream-50">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="h-3.5 w-3.5"></i>
+                                Jubilee Hills
+                            </div>
+                            <span class="status text-sm"></span>
+                        </a>
+
+                        <a href="https://www.google.com/maps/search/?api=1&query=mikro+Sainikpuri" target="_blank"
+                            data-location="sainikpuri"
+                            class="flex flex-col gap-0.5 px-3 py-2.5 text-[13px] text-brand-900 hover:bg-cream-50">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="h-3.5 w-3.5"></i>
+                                Sainikpuri
+                            </div>
+                            <span class="status text-sm"></span>
+                        </a>
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- View toggle -->
+        <div class="flex items-center justify-center"
+            style="animation: fadeInUp .55s ease-out both; animation-delay: .08s;">
+            <div class="inline-flex items-center rounded-full border border-brand-200 bg-white p-1 shadow-sm">
+                <button data-view="home" aria-pressed="true"
+                    class="group inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold rounded-full bg-brand-900 text-white shadow-sm focus:outline-none focus-visible:ring-2 ring-brand-200">
+                    <i data-lucide="home" class="h-3.5 w-3.5"></i>
+                    Home
+                </button>
+                <button data-view="menu" aria-pressed="false"
+                    class="group inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold rounded-full text-brand-900 hover:bg-cream-50 focus:outline-none focus-visible:ring-2 ring-brand-200">
+                    <i data-lucide="list" class="h-3.5 w-3.5"></i>
+                    Menu
+                </button>
+                <button data-view="gallery" aria-pressed="false"
+                    class="group inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold rounded-full text-brand-900 hover:bg-cream-50 focus:outline-none focus-visible:ring-2 ring-brand-200">
+                    <i data-lucide="image" class="h-3.5 w-3.5"></i>
+                    Gallery
+                </button>
+            </div>
+        </div>
+
+        <!-- HOME VIEW -->
+        <section id="homeView" class="space-y-5">
+            <!-- Intro -->
+            <div class="rounded-xl ring-1 ring-brand-200 bg-white shadow-sm p-4"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .08s;">
+                <h2 class="text-[28px] font-bold font-['DIN_2014',sans-serif]">Your neighborhood café</h2>
+                <p class="text-[13px] text-brand-900/70 mt-1.5">Freshly roasted, baked daily, served with care.</p>
+                <div class="mt-3 flex items-center gap-2">
+                    <a data-go-menu="" href="#menu"
+                        class="inline-flex items-center gap-1.5 rounded-full bg-brand-900 text-white px-3.5 py-2 text-[12px] font-semibold shadow-sm hover:opacity-90 focus:outline-none focus-visible:ring-2 ring-brand-200">
+                        <i data-lucide="utensils" class="h-3.5 w-3.5"></i>
+                        View menu
+                    </a>
+                    <a href="tel:+1234567890"
+                        class="inline-flex items-center gap-1.5 rounded-full border border-brand-200 bg-white px-3.5 py-2 text-[12px] font-semibold text-brand-900 shadow-sm hover:shadow focus:outline-none focus-visible:ring-2 ring-brand-200">
+                        <i data-lucide="phone-call" class="h-3.5 w-3.5"></i>
+                        Order ahead
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero with slideshow -->
+            <section class="relative rounded-xl overflow-hidden ring-1 ring-brand-200 bg-white shadow-sm"
+                style="animation: fadeInUp .65s ease-out both; animation-delay: .10s;">
+
+                <div class="relative w-full aspect-[3/2.5] overflow-hidden">
+                    <style>
+                        @keyframes mikroFadeZoom {
+                            0% {
+                                opacity: 0;
+                                transform: scale(1.02);
+                            }
+
+                            6% {
+                                opacity: 1;
+                                transform: scale(1.05);
+                            }
+
+                            20% {
+                                opacity: 1;
+                                transform: scale(1.08);
+                            }
+
+                            26% {
+                                opacity: 0;
+                                transform: scale(1.1);
+                            }
+
+                            100% {
+                                opacity: 0;
+                                transform: scale(1.1);
+                            }
+                        }
+
+                        .mikro-slide {
+                            position: absolute;
+                            inset: 0;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            opacity: 0;
+                            animation: mikroFadeZoom 30s infinite ease-in-out;
+                            will-change: transform, opacity;
+                        }
+
+                        .mikro-slide:nth-child(1) {
+                            animation-delay: 0s;
+                        }
+
+                        .mikro-slide:nth-child(2) {
+                            animation-delay: 6s;
+                        }
+
+                        .mikro-slide:nth-child(3) {
+                            animation-delay: 12s;
+                        }
+
+                        .mikro-slide:nth-child(4) {
+                            animation-delay: 18s;
+                        }
+
+                        .mikro-slide:nth-child(5) {
+                            animation-delay: 24s;
+                        }
+
+                        #menuView li span {
+                            font-size: 14px;
+                            /* adjust as needed */
+                        }
+
+                        #menuView li span:last-child {
+                            font-size: 13px;
+                            /* maybe slightly smaller for prices */
+                        }
+                    </style>
+
+                    <img class="mikro-slide" src="Assets/images/mikro-food-1.jpeg" alt="Freshly brewed coffee"
+                        loading="eager">
+                    <img class="mikro-slide" src="Assets/images/mikro-at-night.jpg" alt="Pour over in progress"
+                        loading="eager">
+                    <img class="mikro-slide" src="Assets/images/mikro-holding-cup-2.jpg" alt="Fresh croissants"
+                        loading="eager">
+                    <img class="mikro-slide" src="Assets/images/mikro-food-3.jpg" alt="Iced latte" loading="eager">
+                    <img class="mikro-slide" src="Assets/images/mikro-story.webp.jpg" alt="Pastry selection"
+                        loading="eager">
+                </div>
+
+                <div class="p-4">
+                    <div class="flex items-center gap-3 text-[13px] text-brand-900/70">
+                        <div class="inline-flex items-center gap-1.5">
+                            <i data-lucide="clock" class="h-3.5 w-3.5"></i>
+                            <span>10:00am - 11:00pm</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Highlights -->
+            <div class="grid grid-cols-2 gap-3" style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
+                <!-- Free Wi-Fi -->
+                <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="wifi" class="h-4 w-4"></i>
+                        <p class="text-[13px] font-semibold">Free Wi-Fi</p>
+                    </div>
+                    <p class="text-[12px] text-brand-900/70 mt-1">Settle in and stay awhile.</p>
+                </div>
+
+                <!-- Good Music -->
+                <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="music" class="h-4 w-4"></i>
+                        <p class="text-[13px] font-semibold">Good Music</p>
+                    </div>
+                    <p class="text-[12px] text-brand-900/70 mt-1">Relax with curated playlists.</p>
+                </div>
+
+                <!-- Homey Experience -->
+                <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="home" class="h-4 w-4"></i>
+                        <p class="text-[13px] font-semibold">Homey Experience</p>
+                    </div>
+                    <p class="text-[12px] text-brand-900/70 mt-1">Warm and welcoming atmosphere.</p>
+                </div>
+
+                <!-- Friendly Staff -->
+                <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="smile" class="h-4 w-4"></i>
+                        <p class="text-[13px] font-semibold">Friendly Staff</p>
+                    </div>
+                    <p class="text-[12px] text-brand-900/70 mt-1">Service with a smile, always.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- MENU VIEW -->
+        <section id="menuView" class="space-y-4 hidden " aria-labelledby="menu">
+            <div class="flex items-end justify-between"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
+                <h2 id="menu" class="text-2xl tracking-tight font-semibold">Menu</h2>
+                <div class="text-[12px] text-brand-900/70">*Prices exclusive of GST</div>
+            </div>
+
+            <!-- To Choose Your Blend -->
+            <div class="rounded-xl ring-1 ring-brand-200 bg-white shadow-sm p-4"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .14s;">
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="coffee" class="h-4 w-4"></i>
+                    <h3 class="text-[15px] font-semibold tracking-tight">To Choose Your Blend</h3>
+                </div>
+                <ul class="divide-y divide-brand-200/30">
+                    <li class="flex justify-between py-2"><span>Espresso</span><span>₹100</span></li>
+                    <li class="flex justify-between py-2"><span>Cortado</span><span>₹160</span></li>
+                    <li class="flex justify-between py-2"><span>Macchiato</span><span>₹160</span></li>
+                    <li class="flex justify-between py-2"><span>Cappuccino</span><span>₹180</span></li>
+                    <li class="flex justify-between py-2"><span>Flat White</span><span>₹190</span></li>
+                    <li class="flex justify-between py-2"><span>Latte</span><span>₹200</span></li>
+                    <li class="flex justify-between py-2"><span>Mocha</span><span>₹240</span></li>
+                    <li class="flex justify-between py-2"><span>Americano</span><span>₹150</span></li>
+                </ul>
+            </div>
+
+            <!-- Signature -->
+            <div class="rounded-xl ring-1 ring-brand-200 bg-white shadow-sm p-4"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .15s;">
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="sparkles" class="h-4 w-4"></i>
+                    <h3 class="text-[15px] font-semibold tracking-tight">Signature</h3>
+                </div>
+                <ul class="divide-y divide-brand-200/30">
+                    <li class="flex justify-between py-2"><span>Mikro Special Espresso</span><span>₹220</span></li>
+                    <li class="flex justify-between py-2"><span>Espresso Tonic</span><span>₹230</span></li>
+                    <li class="flex justify-between py-2"><span>Orange Espresso</span><span>₹240</span></li>
+                    <li class="flex justify-between py-2"><span>Affogato</span><span>₹240</span></li>
+                    <li class="flex justify-between py-2"><span>Salted Caramel Latte</span><span>₹230</span></li>
+                    <li class="flex justify-between py-2"><span>Spanish Latte</span><span>₹230</span></li>
+                    <li class="flex justify-between py-2"><span>Biscoff Latte</span><span>₹250</span></li>
+                    <li class="flex justify-between py-2"><span>Honey Cinnamon Latte</span><span>₹230</span></li>
+                    <li class="flex justify-between py-2"><span>Cold Brew</span><span>₹190</span></li>
+                    <li class="flex justify-between py-2"><span>Orange Cold Brew</span><span>₹230</span></li>
+                    <li class="flex justify-between py-2"><span>Mazagran</span><span>₹230</span></li>
+                </ul>
+            </div>
+
+            <!-- Classic Iced -->
+            <div class="rounded-xl ring-1 ring-brand-200 bg-white shadow-sm p-4"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .16s;">
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="cup-soda" class="h-4 w-4"></i>
+                    <h3 class="text-[15px] font-semibold tracking-tight">Classic Iced</h3>
+                </div>
+                <ul class="divide-y divide-brand-200/30">
+                    <li class="flex justify-between py-2"><span>Iced Latte</span><span>₹190</span></li>
+                    <li class="flex justify-between py-2"><span>Iced Americano</span><span>₹160</span></li>
+                    <li class="flex justify-between py-2"><span>Iced Mocha</span><span>₹240</span></li>
+                    <li class="flex justify-between py-2"><span>Classic Cold Coffee</span><span>₹260</span></li>
+                </ul>
+            </div>
+
+            <!-- Manual Brews -->
+            <div class="rounded-xl ring-1 ring-brand-200 bg-white shadow-sm p-4"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .17s;">
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="beaker" class="h-4 w-4"></i>
+                    <h3 class="text-[15px] font-semibold tracking-tight">Manual Brews</h3>
+                </div>
+                <ul class="divide-y divide-brand-200/30">
+                    <li class="flex justify-between py-2"><span>French Press</span><span>—</span></li>
+                    <li class="flex justify-between py-2"><span>Pour Over</span><span>—</span></li>
+                </ul>
+                <p class="text-[12px] text-brand-900/70 mt-1">Price based on your chosen coffee bean</p>
+            </div>
+
+            <!-- Non Coffee -->
+            <div class="rounded-xl ring-1 ring-brand-200 bg-white shadow-sm p-4"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .18s;">
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="cup-soda" class="h-4 w-4"></i>
+                    <h3 class="text-[15px] font-semibold tracking-tight">Non Coffee</h3>
+                </div>
+                <ul class="divide-y divide-brand-200/30">
+                    <li class="flex justify-between py-2"><span>Mikro Special Lemonade</span><span>₹230</span></li>
+                    <li class="flex justify-between py-2"><span>Hot Chocolate</span><span>₹240</span></li>
+                    <li class="flex justify-between py-2"><span>Matcha Latte</span><span>₹220</span></li>
+                    <li class="flex justify-between py-2"><span>Lemon Iced Tea</span><span>₹210</span></li>
+                    <li class="flex justify-between py-2"><span>Peach Iced Tea</span><span>₹180</span></li>
+                    <li class="flex justify-between py-2"><span>Artisanal Tea Pot</span><span>₹180</span></li>
+                    <li class="flex justify-between py-2"><span>Orange Juice</span><span>₹190</span></li>
+                </ul>
+            </div>
+
+            <!-- Open Toasts -->
+            <div class="rounded-xl ring-1 ring-brand-200 bg-white shadow-sm p-4"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .19s;">
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="sandwich" class="h-4 w-4"></i>
+                    <h3 class="text-[15px] font-semibold tracking-tight">Open Toasts</h3>
+                </div>
+                <ul class="divide-y divide-brand-200/30">
+                    <li class="flex justify-between py-2"><span>Almond Butter</span><span>₹250</span></li>
+                    <li class="flex justify-between py-2"><span>Hazelnut</span><span>₹250</span></li>
+                    <li class="flex justify-between py-2"><span>Hummus</span><span>₹250</span></li>
+                    <li class="flex justify-between py-2"><span>Avocado</span><span>₹280</span></li>
+                    <li class="flex justify-between py-2"><span>Scrambled Eggs</span><span>₹250</span></li>
+                </ul>
+            </div>
+
+            <!-- Bagels -->
+            <div class="rounded-xl ring-1 ring-brand-200 bg-white shadow-sm p-4"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .20s;">
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="donut" class="h-4 w-4"></i>
+                    <h3 class="text-[15px] font-semibold tracking-tight">Bagels</h3>
+                </div>
+                <ul class="divide-y divide-brand-200/30">
+                    <li class="flex justify-between py-2"><span>Plain Bagel + cream cheese / scallion cream
+                            cheese</span><span>₹160</span></li>
+                    <li class="flex justify-between py-2"><span>Everything Bagel + cream cheese / scallion cream
+                            cheese</span><span>₹190</span></li>
+                    <li class="flex justify-between py-2"><span>Avocado Egg Bagel</span><span>₹250</span></li>
+                </ul>
+            </div>
+
+            <!-- Bowls -->
+            <div class="rounded-xl ring-1 ring-brand-200 bg-white shadow-sm p-4"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .21s;">
+                <div class="flex items-center gap-2 mb-3">
+                    <i data-lucide="soup" class="h-4 w-4"></i>
+                    <h3 class="text-[15px] font-semibold tracking-tight">Bowls</h3>
+                </div>
+                <ul class="divide-y divide-brand-200/30">
+                    <li class="flex justify-between py-2"><span>Bun Omelette</span><span>₹190</span></li>
+                    <li class="flex justify-between py-2"><span>Choco Chia Pudding</span><span>₹280</span></li>
+                    <li class="flex justify-between py-2"><span>Granola Yogurt Bowl</span><span>₹280</span></li>
+                    <li class="flex justify-between py-2"><span>Smoothie Bowl</span><span>₹280</span></li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- GALLERY VIEW -->
+        <section id="galleryView" class="space-y-4 hidden" aria-labelledby="gallery">
+            <div class="flex items-end justify-between"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
+                <h2 id="gallery" class="text-2xl tracking-tight font-semibold">Gallery</h2>
+                <div class="text-[12px] text-brand-900/70">Tap an image to view</div>
+            </div>
+
+            <div class="columns-2 gap-2 [column-fill:_balance]">
+
+                <!-- IMG -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/mikro-food-2.jpg" alt="Mikro food 2"
+                        loading="lazy" decoding="async" width="500" height="800">
+                </div>
+
+                <!-- VIDEO -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <video class="w-full h-auto object-cover" autoplay muted loop playsinline preload="metadata"
+                        poster="Assets/images/mikro-holding-cup-2.jpg">
+                        <source src="Assets/images/mikro-video-1.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- IMG -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/mikro-at-night.jpg" alt="Mikro at night"
+                        loading="eager" fetchpriority="high" width="800" height="1000">
+                </div>
+
+                <!-- IMG -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/mikro-pet.jpg" alt="Mikro pet friendly"
+                        loading="lazy" decoding="async" width="800" height="1000">
+                </div>
+
+                <!-- IMG -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/mikro-food-1.jpeg" alt="Mikro food 1"
+                        loading="lazy" decoding="async" width="800" height="800">
+                </div>
+
+                <!-- VIDEO -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <video class="w-full h-auto object-cover" autoplay muted loop playsinline preload="metadata"
+                        poster="Assets/images/mikro-food-1.jpeg">
+                        <source src="Assets/images/mikro-video-2.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <!-- IMG -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/mikro-holding-cup-2.jpg"
+                        alt="Mikro holding cup" loading="lazy" decoding="async" width="800" height="800">
+                </div>
+
+            </div>
+
+
+            <p class="text-[12px] text-brand-900/70 px-1"
+                style="animation: fadeIn .6s ease-out both; animation-delay: .24s;">
+                More coming soon. Want us to feature your photo? Tag @mikro.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Sticky Contact Button -->
+    <div class="fixed bottom-4 inset-x-4 max-w-sm mx-auto">
+        <a href="tel:+91 8801506263"
+            class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-brand-900 text-white px-5 py-4 text-[15px] font-semibold shadow-lg shadow-black/20 hover:opacity-90 active:opacity-100 transition-colors focus:outline-none focus-visible:ring-2 ring-brand-200"
+            style="animation: slideUp .5s ease-out both; animation-delay: .12s;">
+            <i data-lucide="phone-call" class="h-4.5 w-4.5"></i>
+            Contact
+        </a>
+        <div class="mt-2 text-center">
+            <a href="wa.me/918801506263"
+                class="text-[12px] text-brand-900/70 underline underline-offset-4 hover:text-brand-900 focus:outline-none focus-visible:ring-2 ring-brand-200 rounded">Text
+                us instead</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });
+
+            // View toggle
+            const btns = document.querySelectorAll('[data-view]');
+            const home = document.getElementById('homeView');
+            const menu = document.getElementById('menuView');
+            const gallery = document.getElementById('galleryView');
+
+            function activate(view) {
+                const isHome = view === 'home';
+                const isMenu = view === 'menu';
+                const isGallery = view === 'gallery';
+
+                home.classList.toggle('hidden', !isHome);
+                menu.classList.toggle('hidden', !isMenu);
+                gallery.classList.toggle('hidden', !isGallery);
+
+                btns.forEach(b => {
+                    const active = b.dataset.view === view;
+                    b.setAttribute('aria-pressed', active ? 'true' : 'false');
+                    if (active) {
+                        b.classList.add('bg-brand-900', 'text-white', 'shadow-sm');
+                        b.classList.remove('text-brand-900', 'hover:bg-cream-50');
+                    } else {
+                        b.classList.remove('bg-brand-900', 'text-white', 'shadow-sm');
+                        b.classList.add('text-brand-900', 'hover:bg-cream-50');
+                    }
+                });
+            }
+
+            btns.forEach(b => b.addEventListener('click', () => activate(b.dataset.view)));
+            document.querySelectorAll('[data-go-menu]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    activate('menu');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            // Directions dropdown
+            const toggleBtn = document.querySelector('[data-dropdown-toggle="locationsMenu"]');
+            const menuEl = document.getElementById('locationsMenu');
+
+            function closeMenu() {
+                menuEl.classList.add('hidden');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+            }
+            function openMenu() {
+                menuEl.classList.remove('hidden');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+            }
+
+            toggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = !menuEl.classList.contains('hidden');
+                if (isOpen) closeMenu(); else openMenu();
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!menuEl.classList.contains('hidden')) {
+                    const within = menuEl.contains(e.target) || toggleBtn.contains(e.target);
+                    if (!within) closeMenu();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeMenu();
+            });
+            // ---- Location open/close status (subtext) ----
+            // Define hours in 24h local time: open:[H,M], close:[H,M]
+            const hours = {
+                jubilee: { open: [10, 0], close: [23, 0] }, // 10:00–23:00
+                sainikpuri: { open: [10, 0], close: [23, 0] }  // 10:00–23:00
+            };
+
+            function minutesSinceMidnight(d) { return d.getHours() * 60 + d.getMinutes(); }
+            function toMins(h, m) { return h * 60 + m; }
+            function fmt(h, m) {
+                const ampm = h >= 12 ? 'pm' : 'am';
+                const hr = ((h + 11) % 12) + 1; // 0->12, 13->1
+                const mm = String(m).padStart(2, '0');
+                return `${hr}:${mm}${ampm}`;
+            }
+
+            function statusFor(now, openMins, closeMins) {
+                const nowM = minutesSinceMidnight(now);
+                const closesNextDay = closeMins <= openMins; // support past-midnight close
+                const isOpen = closesNextDay ? (nowM >= openMins || nowM < closeMins)
+                    : (nowM >= openMins && nowM < closeMins);
+
+                if (!isOpen) {
+                    // If it opens later today (not overnight schedule)
+                    if (!closesNextDay && nowM < openMins) {
+                        return { label: 'Opens ' + fmt(Math.floor(openMins / 60), openMins % 60), cls: 'text-amber-600' };
+                    }
+                    return { label: 'Closed', cls: 'text-red-600' };
+                }
+
+                // Open — check if closing soon (<= 30 mins)
+                let minsLeft = closesNextDay ? ((24 * 60 - nowM) + closeMins) : (closeMins - nowM);
+                if (minsLeft <= 30) return { label: 'Closes soon', cls: 'text-amber-600' };
+                return { label: 'Open now', cls: 'text-green-600' };
+            }
+
+            function applyStatuses() {
+                const now = new Date();
+                document.querySelectorAll('#locationsMenu a[data-location]').forEach(a => {
+                    const key = a.getAttribute('data-location');
+                    const info = hours[key];
+                    if (!info) return;
+
+                    const openM = toMins(info.open[0], info.open[1]);
+                    const closeM = toMins(info.close[0], info.close[1]);
+                    const st = statusFor(now, openM, closeM);
+                    const span = a.querySelector('.status');
+                    if (span) {
+                        // Show closing time for Open/Closes soon
+                        const suffix = st.label.startsWith('Opens') ? '' : ` · until ${fmt(info.close[0], info.close[1])}`;
+                        span.textContent = st.label + suffix;
+                        span.className = `status ${st.cls}`;
+                    }
+                });
+            }
+
+            applyStatuses();
+            // Refresh every minute to flip states right on time
+            setInterval(applyStatuses, 60 * 1000);
+
+        });
+    </script>
+
+</body>
+
+</html>
