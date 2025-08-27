@@ -23,45 +23,47 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            function updateOpenStatus() {
+        (function () {
+            function setStatus() {
                 const now = new Date();
-                const h = now.getHours();
-                const m = now.getMinutes();
-                const mins = h * 60 + m;
+                const mins = now.getHours() * 60 + now.getMinutes();
 
-                const openTime = 10 * 60;   // 10:00 = 600 minutes
-                const closeTime = 23 * 60;  // 23:00 = 1380 minutes
+                const OPEN = 10 * 60;    // 10:00 = 600
+                const CLOSE = 23 * 60;   // 23:00 = 1380
 
-                document.querySelectorAll("[data-location]").forEach(section => {
-                    const statusEl = section.querySelector(".open-status");
-                    if (!statusEl) return;
+                document.querySelectorAll(".open-status").forEach(el => {
+                    let html = "";
 
-                    let status = "";
-                    if (mins < openTime) {
-                        // Before opening
-                        status = `<i data-lucide="circle" class="h-2 w-2 text-gray-400"></i> Opens at 10 am`;
-                    } else if (mins >= openTime && mins < closeTime - 30) {
-                        // Open normally
-                        status = `<i data-lucide="circle" class="h-2 w-2 text-emerald-500"></i> Open • Closes 11 pm`;
-                    } else if (mins >= closeTime - 30 && mins < closeTime) {
-                        // Closes soon (last 30 min)
-                        status = `<i data-lucide="circle" class="h-2 w-2 text-amber-500"></i> Closes Soon • 11 pm`;
+                    if (mins < OPEN) {
+                        html = `<i data-lucide="circle" class="h-2 w-2 text-gray-400"></i><span>Opens at 10 am</span>`;
+                    } else if (mins >= OPEN && mins < CLOSE - 30) {
+                        html = `<i data-lucide="circle" class="h-2 w-2 text-emerald-500"></i><span>Open • Closes 11 pm</span>`;
+                    } else if (mins >= CLOSE - 30 && mins < CLOSE) {
+                        html = `<i data-lucide="circle" class="h-2 w-2 text-amber-500"></i><span>Closes Soon • 11 pm</span>`;
                     } else {
-                        // After closing
-                        status = `<i data-lucide="circle" class="h-2 w-2 text-red-500"></i> Closed • Opens 10 am`;
+                        html = `<i data-lucide="circle" class="h-2 w-2 text-red-500"></i><span>Closed • Opens 10 am</span>`;
                     }
 
-                    statusEl.innerHTML = status;
+                    el.innerHTML = html;
+                    // Ensure perfect single-line centering even if HTML classes change
+                    el.classList.add("inline-flex", "items-center", "gap-1", "whitespace-nowrap", "justify-center");
                 });
 
-                lucide.createIcons(); // refresh icons
+                if (window.lucide && typeof window.lucide.createIcons === "function") {
+                    window.lucide.createIcons();
+                }
             }
 
-            updateOpenStatus();
-            setInterval(updateOpenStatus, 60 * 1000); // refresh every minute
-        });
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", setStatus);
+            } else {
+                setStatus();
+            }
+
+            setInterval(setStatus, 60 * 1000);
+        })();
     </script>
+
 
 
     <style>
