@@ -63,6 +63,66 @@
             setInterval(setStatus, 60 * 1000);
         })();
     </script>
+    <script>
+        // --- Nearest location label (geolocation + haversine) ---
+        (function () {
+            const labelEl = document.getElementById('currentLocationLabel');
+            if (!labelEl) return;
+
+            // Define your locations (coords + label)
+            const locations = [
+                {
+                    key: 'jubilee',
+                    name: 'Jubilee Hills',
+                    lat: 17.4304,  // <-- update if needed
+                    lng: 78.4120
+                },
+                {
+                    key: 'sainikpuri',
+                    name: 'Sainikpuri',
+                    lat: 17.4765,  // <-- update if needed
+                    lng: 78.5590
+                }
+            ];
+
+            const fallback = locations[0];
+
+            function haversine(lat1, lon1, lat2, lon2) {
+                const toRad = d => d * Math.PI / 180;
+                const R = 6371; // km
+                const dLat = toRad(lat2 - lat1);
+                const dLon = toRad(lon2 - lon1);
+                const a = Math.sin(dLat / 2) ** 2 +
+                    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                    Math.sin(dLon / 2) ** 2;
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                return R * c;
+            }
+
+            function setLabel(name) {
+                labelEl.textContent = name;
+            }
+
+            // Try geolocation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        const { latitude, longitude } = pos.coords;
+                        let nearest = fallback, best = Infinity;
+                        for (const loc of locations) {
+                            const d = haversine(latitude, longitude, loc.lat, loc.lng);
+                            if (d < best) { best = d; nearest = loc; }
+                        }
+                        setLabel(nearest.name);
+                    },
+                    () => setLabel(fallback.name),
+                    { enableHighAccuracy: false, timeout: 5000, maximumAge: 300000 }
+                );
+            } else {
+                setLabel(fallback.name);
+            }
+        })();
+    </script>
 
 
 
@@ -249,43 +309,57 @@
                     <p class="text-[12px] text-brand-900/70 mt-1">Neighbourhood Café</p>
                 </div>
             </div>
-            <nav class="flex items-center gap-[3px]">
-                <a href="tel:+91 8801506263"
-                    class="inline-flex items-center gap-1.5 rounded-full border border-brand-200 bg-white px-3.5 py-[0.65rem] text-[12px] font-semibold text-brand-900 shadow-sm hover:shadow transition-all hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 ring-brand-200"
-                    style="animation: fadeInUp .6s ease-out both; animation-delay: .08s;">
-                    <i data-lucide="phone" class="h-3.5 w-3.5"></i>
-                </a>
 
+            <nav class="flex items-center gap-[3px]">
                 <!-- Directions dropdown -->
                 <div class="relative" style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
                     <button type="button" data-dropdown-toggle="locationsMenu"
                         class="inline-flex items-center gap-1.5 rounded-full border border-brand-200 bg-white px-3.5 py-2 text-[12px] font-semibold text-brand-900 shadow-sm hover:shadow transition-all hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 ring-brand-200">
                         <i data-lucide="map-pin" class="h-3.5 w-3.5"></i>
-                        Directions
+                        <span id="currentLocationLabel">Jubilee Hills</span>
                         <i data-lucide="chevron-down" class="h-3.5 w-3.5"></i>
                     </button>
-                    <div id="locationsMenu"
-                        class="absolute right-0 z-50 mt-1 w-52 overflow-hidden rounded-xl border border-brand-200 bg-white shadow-lg shadow-black/10 hidden">
-                        <!-- inside: <div id="locationsMenu" ...> -->
-                        <a href="https://www.google.com/maps/search/?api=1&query=mikro+Jubilee+Hills" target="_blank"
-                            data-location="jubilee"
-                            class="flex flex-col gap-0.5 px-3 py-2.5 text-[13px] text-brand-900 hover:bg-cream-50">
-                            <div class="flex items-center gap-2">
-                                <i data-lucide="map-pin" class="h-3.5 w-3.5"></i>
-                                Jubilee Hills
-                            </div>
-                            <span class="status text-sm"></span>
-                        </a>
 
-                        <a href="https://www.google.com/maps/search/?api=1&query=mikro+Sainikpuri" target="_blank"
-                            data-location="sainikpuri"
-                            class="flex flex-col gap-0.5 px-3 py-2.5 text-[13px] text-brand-900 hover:bg-cream-50">
-                            <div class="flex items-center gap-2">
-                                <i data-lucide="map-pin" class="h-3.5 w-3.5"></i>
-                                Sainikpuri
-                            </div>
-                            <span class="status text-sm"></span>
-                        </a>
+                    <div id="locationsMenu"
+                        class="absolute right-0 z-50 mt-1 w-64 overflow-hidden rounded-xl border border-brand-200 bg-white shadow-lg shadow-black/10 hidden">
+                        
+                        <!-- Jubilee Hills -->
+                        <div data-location="jubilee"
+                            class="flex items-center justify-between gap-2 px-3 py-2.5 text-[13px] text-brand-900 hover:bg-cream-50">
+                            <a href="https://www.google.com/maps/search/?api=1&query=mikro+Jubilee+Hills"
+                                target="_blank" class="flex flex-col gap-0.5 min-w-0">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="map-pin" class="h-3.5 w-3.5 shrink-0"></i>
+                                    <span class="truncate">Jubilee Hills</span>
+                                </div>
+                                <!-- Status injected here -->
+                                <span class="open-status text-[12px] text-brand-900/70"></span>
+                            </a>
+                            <a href="tel:+918801506263"
+                                class="shrink-0 inline-flex items-center justify-center rounded-full border border-brand-200 bg-white p-2 hover:shadow focus:outline-none focus-visible:ring-2 ring-brand-200"
+                                aria-label="Call Jubilee Hills">
+                                <i data-lucide="phone" class="h-3.5 w-3.5"></i>
+                            </a>
+                        </div>
+
+                        <!-- Jubilee Hills -->
+                        <div data-location="jubilee"
+                            class="flex items-center justify-between gap-2 px-3 py-2.5 text-[13px] text-brand-900 hover:bg-cream-50">
+                            <a href="https://www.google.com/maps/search/?api=1&query=mikro+Jubilee+Hills"
+                                target="_blank" class="flex flex-col gap-0.5 min-w-0">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="map-pin" class="h-3.5 w-3.5 shrink-0"></i>
+                                    <span class="truncate">Jubilee Hills</span>
+                                </div>
+                                <!-- Status injected here -->
+                                <span class="open-status text-[12px] text-brand-900/70"></span>
+                            </a>
+                            <a href="tel:+918801506263"
+                                class="shrink-0 inline-flex items-center justify-center rounded-full border border-brand-200 bg-white p-2 hover:shadow focus:outline-none focus-visible:ring-2 ring-brand-200"
+                                aria-label="Call Jubilee Hills">
+                                <i data-lucide="phone" class="h-3.5 w-3.5"></i>
+                            </a>
+                        </div>
 
                     </div>
                 </div>
