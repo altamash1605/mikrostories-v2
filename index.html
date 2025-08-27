@@ -21,6 +21,49 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function updateOpenStatus() {
+                const now = new Date();
+                const h = now.getHours();
+                const m = now.getMinutes();
+                const mins = h * 60 + m;
+
+                const openTime = 10 * 60;   // 10:00 = 600 minutes
+                const closeTime = 23 * 60;  // 23:00 = 1380 minutes
+
+                document.querySelectorAll("[data-location]").forEach(section => {
+                    const statusEl = section.querySelector(".open-status");
+                    if (!statusEl) return;
+
+                    let status = "";
+                    if (mins < openTime) {
+                        // Before opening
+                        status = `<i data-lucide="circle" class="h-2 w-2 text-gray-400"></i> Opens at 10 am`;
+                    } else if (mins >= openTime && mins < closeTime - 30) {
+                        // Open normally
+                        status = `<i data-lucide="circle" class="h-2 w-2 text-emerald-500"></i> Open • Closes 11 pm`;
+                    } else if (mins >= closeTime - 30 && mins < closeTime) {
+                        // Closes soon (last 30 min)
+                        status = `<i data-lucide="circle" class="h-2 w-2 text-amber-500"></i> Closes Soon • 11 pm`;
+                    } else {
+                        // After closing
+                        status = `<i data-lucide="circle" class="h-2 w-2 text-red-500"></i> Closed • Opens 10 am`;
+                    }
+
+                    statusEl.innerHTML = status;
+                });
+
+                lucide.createIcons(); // refresh icons
+            }
+
+            updateOpenStatus();
+            setInterval(updateOpenStatus, 60 * 1000); // refresh every minute
+        });
+    </script>
+
+
     <style>
         /* Instagram gradient flash (every 10s) */
         @keyframes instaFlash {
@@ -277,7 +320,7 @@
                 <h2 class="text-[28px] font-bold font-['DIN_2014',sans-serif]">Your neighborhood café</h2>
                 <p class="text-[13px] text-brand-900/70 mt-1.5">Freshly roasted, baked daily, served with care.</p>
         -->
-                <!--   View Menu & Order Ahead Buttons 
+            <!--   View Menu & Order Ahead Buttons 
                 <div class="mt-3 flex items-center gap-2">
                     <a data-go-menu="" href="#menu"
                         class="inline-flex items-center gap-1.5 rounded-full bg-brand-900 text-white px-3.5 py-2 text-[12px] font-semibold shadow-sm hover:opacity-90 focus:outline-none focus-visible:ring-2 ring-brand-200">
@@ -290,34 +333,33 @@
                         Order ahead
                     </a>
                 </div> -->
-                <!-- Quick Highlights -->
-                <div class="grid grid-cols-2 gap-2 mt-5"
-                    style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
-                    <!-- Free Wi-Fi -->
-                    <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="wifi" class="h-4 w-4"></i>
-                            <p class="text-[13px] font-semibold">Free Wi-Fi</p>
-                        </div>
-                        <p class="text-[12px] text-brand-900/70 mt-1">Settle in and stay awhile.</p>
+            <!-- Quick Highlights -->
+            <div class="grid grid-cols-2 gap-2 mt-5"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
+                <!-- Free Wi-Fi -->
+                <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="wifi" class="h-4 w-4"></i>
+                        <p class="text-[13px] font-semibold">Free Wi-Fi</p>
                     </div>
-
-                    <!-- Good Music -->
-                    <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="music" class="h-4 w-4"></i>
-                            <p class="text-[13px] font-semibold">Good Music</p>
-                        </div>
-                        <p class="text-[12px] text-brand-900/70 mt-1">Relax with curated playlists.</p>
-                    </div>
+                    <p class="text-[12px] text-brand-900/70 mt-1">Settle in and stay awhile.</p>
                 </div>
+
+                <!-- Good Music -->
+                <div class="rounded-lg border border-brand-200 bg-white p-3 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="music" class="h-4 w-4"></i>
+                        <p class="text-[13px] font-semibold">Good Music</p>
+                    </div>
+                    <p class="text-[12px] text-brand-900/70 mt-1">Relax with curated playlists.</p>
+                </div>
+            </div>
             </div>
 
             <!-- HERO: Jubilee Hills -->
             <section
                 class="relative rounded-xl px-1 overflow-hidden ring-1 ring-brand-200 bg-white text-brand-900 shadow-sm"
-                style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;"
-                >
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
                 <!-- Media strip -->
                 <div class="flex gap-1 overflow-x-auto snap-x snap-mandatory scrollbar-hide p-1">
                     <img src="Assets/images/mikro-at-night.jpg" class="h-44 w-72 object-cover rounded-lg snap-start"
@@ -335,12 +377,13 @@
                 <!-- Info + actions -->
                 <div class="p-4">
                     <h3 class="text-[16px] font-semibold">mikro | Jubilee Hills</h3>
-                    <div class="mt-1 text-[12px] text-brand-900/70 flex items-center gap-2">
-                        <span class="inline-flex items-center gap-1.5">
-                            <i data-lucide="circle" class="h-2 w-2 text-emerald-500"></i> Open
+
+                    <!-- STATUS (modified) -->
+                    <div class="mt-1 text-[12px] text-brand-900/70 flex items-start justify-start">
+                        <span class="open-status inline-flex items-center gap-1">
+                            <i data-lucide="circle" class="h-2 w-2 text-gray-400"></i>
+                            <span>Loading...</span>
                         </span>
-                        <span class="text-brand-900/30">•</span>
-                        <span>Closes 11 pm</span>
                     </div>
 
                     <!-- Pill actions row (scrollable) -->
@@ -369,8 +412,7 @@
             <!-- HERO: Sainikpuri -->
             <section
                 class="relative mt-3 rounded-xl px-1 overflow-hidden ring-1 ring-brand-200 bg-white text-brand-900 shadow-sm"
-                style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;"
-                >
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
                 <div class="flex gap-1 overflow-x-auto snap-x snap-mandatory scrollbar-hide p-1">
                     <img src="Assets/images/mikro-holding-cup-2.jpg"
                         class="h-44 w-72 object-cover rounded-lg snap-start" alt="Sainikpuri bar" loading="eager">
@@ -386,12 +428,13 @@
 
                 <div class="p-4">
                     <h3 class="text-[16px] font-semibold">mikro | Sainikpuri</h3>
-                    <div class="mt-1 text-[12px] text-brand-900/70 flex items-center gap-2">
-                        <span class="inline-flex items-center gap-1.5">
-                            <i data-lucide="circle" class="h-2 w-2 text-emerald-500"></i> Open
+
+                    <!-- STATUS (modified) -->
+                    <div class="mt-1 text-[12px] text-brand-900/70 flex items-start justify-start">
+                        <span class="open-status flex items-center gap-1">
+                            <i data-lucide="circle" class="h-2 w-2 text-gray-400"></i>
+                            <span>Loading...</span>
                         </span>
-                        <span class="text-brand-900/30">•</span>
-                        <span>Closes 11 pm</span>
                     </div>
 
                     <!-- Pill actions row (scrollable) -->
@@ -416,6 +459,7 @@
                     </div>
                 </div>
             </section>
+
 
             <script>
                 (function () {
