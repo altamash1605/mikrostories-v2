@@ -233,101 +233,190 @@
                 </div>
             </div>
 
-            <!-- Hero with slideshow -->
-            <section class="relative rounded-xl overflow-hidden ring-1 ring-brand-200 bg-white shadow-sm"
-                style="animation: fadeInUp .65s ease-out both; animation-delay: .10s;">
 
-                <div class="relative w-full aspect-[3/2.5] overflow-hidden">
-                    <style>
-                        @keyframes mikroFadeZoom {
-                            0% {
-                                opacity: 0;
-                                transform: scale(1.02);
-                            }
 
-                            6% {
-                                opacity: 1;
-                                transform: scale(1.05);
-                            }
+            <style>
+                /* hide scrollbar for the media strip (optional) */
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
 
-                            20% {
-                                opacity: 1;
-                                transform: scale(1.08);
-                            }
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            </style>
 
-                            26% {
-                                opacity: 0;
-                                transform: scale(1.1);
-                            }
 
-                            100% {
-                                opacity: 0;
-                                transform: scale(1.1);
-                            }
-                        }
 
-                        .mikro-slide {
-                            position: absolute;
-                            inset: 0;
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                            opacity: 0;
-                            animation: mikroFadeZoom 30s infinite ease-in-out;
-                            will-change: transform, opacity;
-                        }
+            <style>
+                /* hide scrollbar for the media strip (optional) */
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
 
-                        .mikro-slide:nth-child(1) {
-                            animation-delay: 0s;
-                        }
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            </style>
 
-                        .mikro-slide:nth-child(2) {
-                            animation-delay: 6s;
-                        }
 
-                        .mikro-slide:nth-child(3) {
-                            animation-delay: 12s;
-                        }
+            <style>
+                /* hide scrollbar for the media strip (optional) */
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
 
-                        .mikro-slide:nth-child(4) {
-                            animation-delay: 18s;
-                        }
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            </style>
 
-                        .mikro-slide:nth-child(5) {
-                            animation-delay: 24s;
-                        }
-
-                        #menuView li span {
-                            font-size: 14px;
-                            /* adjust as needed */
-                        }
-
-                        #menuView li span:last-child {
-                            font-size: 13px;
-                            /* maybe slightly smaller for prices */
-                        }
-                    </style>
-
-                    <img class="mikro-slide" src="Assets/images/mikro-food-1.jpeg" alt="Freshly brewed coffee"
-                        loading="eager">
-                    <img class="mikro-slide" src="Assets/images/mikro-at-night.jpg" alt="Pour over in progress"
-                        loading="eager">
-                    <img class="mikro-slide" src="Assets/images/mikro-holding-cup-2.jpg" alt="Fresh croissants"
-                        loading="eager">
-                    <img class="mikro-slide" src="Assets/images/mikro-food-3.jpg" alt="Iced latte" loading="eager">
-                    <img class="mikro-slide" src="Assets/images/mikro-story.webp.jpg" alt="Pastry selection"
-                        loading="eager">
+            <!-- HERO: Jubilee Hills -->
+            <section
+                class="relative rounded-xl overflow-hidden ring-1 ring-brand-200 bg-white text-brand-900 shadow-sm">
+                <!-- Media strip -->
+                <div class="flex gap-1 overflow-x-auto snap-x snap-mandatory scrollbar-hide p-1">
+                    <img src="Assets/images/mikro-at-night.jpg" class="h-44 w-72 object-cover rounded-lg snap-start"
+                        alt="Jubilee exterior" loading="eager" fetchpriority="high">
+                    <img src="Assets/images/mikro-food-1.jpeg" class="h-44 w-72 object-cover rounded-lg snap-start"
+                        alt="Food 1" loading="lazy" decoding="async">
+                    <video class="h-44 w-72 object-cover rounded-lg snap-start" autoplay muted loop playsinline
+                        preload="metadata" poster="Assets/images/mikro-holding-cup-2.jpg">
+                        <source src="Assets/images/mikro-video-1.mp4" type="video/mp4">
+                    </video>
+                    <img src="Assets/images/mikro-pet.jpg" class="h-44 w-72 object-cover rounded-lg snap-start"
+                        alt="Pet friendly" loading="lazy" decoding="async">
                 </div>
 
+                <!-- Info + actions -->
                 <div class="p-4">
-                    <div class="flex items-center gap-3 text-[13px] text-brand-900/70">
-                        <div class="inline-flex items-center gap-1.5">
-                            <i data-lucide="clock" class="h-3.5 w-3.5"></i>
-                            <span>10:00am - 11:00pm</span>
-                        </div>
+                    <h3 class="text-[16px] font-semibold">mikro | Jubilee Hills</h3>
+                    <div class="mt-1 text-[12px] text-brand-900/70 flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1.5">
+                            <i data-lucide="circle" class="h-3 w-3 text-emerald-500"></i> Open
+                        </span>
+                        <span class="text-brand-900/30">•</span>
+                        <span>Closes 11 pm</span>
+                    </div>
+
+                    <!-- Pill actions row -->
+                    <div class="mt-3 flex justify-center gap-2">
+                        <a href="tel:+91XXXXXXXXXX"
+                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            <i data-lucide="phone" class="h-4 w-4"></i> Call
+                        </a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=mikro+Jubilee+Hills" target="_blank"
+                            rel="noopener"
+                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            <i data-lucide="map" class="h-4 w-4"></i> Directions
+                        </a>
+                        <a href="#"
+                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            <i data-lucide="utensils" class="h-4 w-4"></i> Order Ahead
+                        </a>
                     </div>
                 </div>
             </section>
+
+            <!-- HERO: Sainikpuri -->
+            <section
+                class="relative mt-3 rounded-xl overflow-hidden ring-1 ring-brand-200 bg-white text-brand-900 shadow-sm">
+                <div class="flex gap-1 overflow-x-auto snap-x snap-mandatory scrollbar-hide p-1">
+                    <img src="Assets/images/mikro-holding-cup-2.jpg"
+                        class="h-44 w-72 object-cover rounded-lg snap-start" alt="Sainikpuri bar" loading="eager">
+                    <img src="Assets/images/mikro-food-2.jpg" class="h-44 w-72 object-cover rounded-lg snap-start"
+                        alt="Food 2" loading="lazy" decoding="async">
+                    <video class="h-44 w-72 object-cover rounded-lg snap-start" autoplay muted loop playsinline
+                        preload="metadata" poster="Assets/images/mikro-at-night.jpg">
+                        <source src="Assets/images/mikro-video-2.mp4" type="video/mp4">
+                    </video>
+                    <img src="Assets/images/mikro-food-1.jpeg" class="h-44 w-72 object-cover rounded-lg snap-start"
+                        alt="Food 1" loading="lazy" decoding="async">
+                </div>
+
+                <div class="p-4">
+                    <h3 class="text-[16px] font-semibold">mikro | Sainikpuri</h3>
+                    <div class="mt-1 text-[12px] text-brand-900/70 flex items-center gap-2">
+                        <span class="inline-flex items-center gap-1.5">
+                            <i data-lucide="circle" class="h-3 w-3 text-emerald-500"></i> Open
+                        </span>
+                        <span class="text-brand-900/30">•</span>
+                        <span>Closes 11 pm</span>
+                    </div>
+
+                    <!-- Pill actions row -->
+                    <div class="mt-3 flex justify-center gap-2">
+                        <a href="tel:+91YYYYYYYYYY"
+                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            <i data-lucide="phone" class="h-4 w-4"></i> Call
+                        </a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=mikro+Sainikpuri" target="_blank"
+                            rel="noopener"
+                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            <i data-lucide="map" class="h-4 w-4"></i> Directions
+                        </a>
+                        <a href="#"
+                            class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200">
+                            <i data-lucide="utensils" class="h-4 w-4"></i> Order Ahead
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <style>
+                /* hide scrollbar for the media strip (optional) */
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            </style>
+
+
+            <script>
+                // Toggle heroes by pill
+                (function () {
+                    const buttons = document.querySelectorAll('button[data-hero]');
+                    const sections = {
+                        jubilee: document.getElementById('hero-jubilee'),
+                        sainikpuri: document.getElementById('hero-sainikpuri')
+                    };
+                    function show(which) {
+                        Object.entries(sections).forEach(([k, el]) => {
+                            el.classList.toggle('hidden', k !== which);
+                        });
+                        buttons.forEach(b => {
+                            const active = b.dataset.hero === which;
+                            b.classList.toggle('bg-slate-900', active);
+                            b.classList.toggle('text-white', active);
+                            b.classList.toggle('hover:bg-slate-50', !active);
+                            b.classList.toggle('text-brand-900', !active);
+                        });
+                    }
+                    buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.hero)));
+                    // optional: default to Jubilee
+                    show('jubilee');
+                })();
+            </script>
+
+            <style>
+                /* hide scrollbar for the media strip (optional) */
+                .scrollbar-hide::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .scrollbar-hide {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            </style>
+
 
             <!-- Quick Highlights -->
             <div class="grid grid-cols-2 gap-3" style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
@@ -536,7 +625,7 @@
                 <div
                     class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
                     <video class="w-full h-auto object-cover" autoplay muted loop playsinline preload="metadata"
-                        poster="Assets/images/mikro-holding-cup-2.jpg">
+                        poster="Assets/images/mikro-front-dog.jpg">
                         <source src="Assets/images/mikro-video-1.mp4" type="video/mp4">
                     </video>
                 </div>
@@ -574,7 +663,7 @@
                 <!-- IMG -->
                 <div
                     class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
-                    <img class="w-full h-auto object-cover" src="Assets/images/mikro-holding-cup-2.jpg"
+                    <img class="w-full h-auto object-cover" src="Assets/images/mikro-staff-1.jpg"
                         alt="Mikro holding cup" loading="lazy" decoding="async" width="800" height="800">
                 </div>
 
