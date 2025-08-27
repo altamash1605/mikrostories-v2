@@ -272,10 +272,11 @@
         <!-- HOME VIEW -->
         <section id="homeView" class="space-y-5">
             <!-- Intro -->
-            <div class="rounded-xl ring-1 ring-brand-200 bg-white shadow-sm p-4"
+            <!-- <div class="rounded-xl ring-1 ring-brand-200 bg-white shadow-sm p-4"
                 style="animation: fadeInUp .6s ease-out both; animation-delay: .08s;">
                 <h2 class="text-[28px] font-bold font-['DIN_2014',sans-serif]">Your neighborhood café</h2>
                 <p class="text-[13px] text-brand-900/70 mt-1.5">Freshly roasted, baked daily, served with care.</p>
+        -->
                 <!--   View Menu & Order Ahead Buttons 
                 <div class="mt-3 flex items-center gap-2">
                     <a data-go-menu="" href="#menu"
@@ -314,7 +315,9 @@
 
             <!-- HERO: Jubilee Hills -->
             <section
-                class="relative rounded-xl px-1 overflow-hidden ring-1 ring-brand-200 bg-white text-brand-900 shadow-sm">
+                class="relative rounded-xl px-1 overflow-hidden ring-1 ring-brand-200 bg-white text-brand-900 shadow-sm"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;"
+                >
                 <!-- Media strip -->
                 <div class="flex gap-1 overflow-x-auto snap-x snap-mandatory scrollbar-hide p-1">
                     <img src="Assets/images/mikro-at-night.jpg" class="h-44 w-72 object-cover rounded-lg snap-start"
@@ -365,7 +368,9 @@
 
             <!-- HERO: Sainikpuri -->
             <section
-                class="relative mt-3 rounded-xl px-1 overflow-hidden ring-1 ring-brand-200 bg-white text-brand-900 shadow-sm">
+                class="relative mt-3 rounded-xl px-1 overflow-hidden ring-1 ring-brand-200 bg-white text-brand-900 shadow-sm"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;"
+                >
                 <div class="flex gap-1 overflow-x-auto snap-x snap-mandatory scrollbar-hide p-1">
                     <img src="Assets/images/mikro-holding-cup-2.jpg"
                         class="h-44 w-72 object-cover rounded-lg snap-start" alt="Sainikpuri bar" loading="eager">
@@ -412,6 +417,43 @@
                 </div>
             </section>
 
+            <script>
+                (function () {
+                    // How much of the last pill to keep visible (in pixels)
+                    const PEEK_PX = 48;
+
+                    // Find each horizontal pill belt that contains the "star" (Leave a Review) icon
+                    const belts = Array.from(document.querySelectorAll('.overflow-x-auto.snap-x'))
+                        .filter(belt => belt.querySelector('i[data-lucide="star"]'));
+
+                    // Only set the initial peek once, and stop adjusting after the user scrolls
+                    const applied = new WeakSet();
+                    function applyPeek(belt) {
+                        if (!belt) return;
+                        const max = belt.scrollWidth - belt.clientWidth;
+                        if (max > 0 && !applied.has(belt)) {
+                            // Position so the last pill is PEEK_PX into view
+                            belt.scrollLeft = Math.max(0, max - PEEK_PX);
+                        }
+                    }
+
+                    // Initial apply
+                    belts.forEach(belt => {
+                        applyPeek(belt);
+                        // Once the user scrolls, don't fight them
+                        belt.addEventListener('pointerdown', () => applied.add(belt), { once: true });
+                        belt.addEventListener('wheel', () => applied.add(belt), { once: true, passive: true });
+                        belt.addEventListener('touchstart', () => applied.add(belt), { once: true, passive: true });
+                    });
+
+                    // Re-apply on resize if the user hasn't interacted yet
+                    let rAF;
+                    window.addEventListener('resize', () => {
+                        cancelAnimationFrame(rAF);
+                        rAF = requestAnimationFrame(() => belts.forEach(belt => applyPeek(belt)));
+                    });
+                })();
+            </script>
 
 
             <style>
