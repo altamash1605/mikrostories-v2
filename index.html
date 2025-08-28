@@ -24,28 +24,46 @@
 
     <script>
         (function () {
+            function fmtLabel(mins) {
+                const h24 = Math.floor(mins / 60), m = mins % 60;
+                const ampm = h24 >= 12 ? 'pm' : 'am';
+                const h12 = ((h24 + 11) % 12) + 1;
+                return `${h12}${m ? ':' + String(m).padStart(2, '0') : ''} ${ampm}`;
+            }
+
+            // Per-location hours: Jubilee 7:00–22:00, Sainikpuri 8:00–22:00
+            const HOURS = {
+                jubilee: { open: 7 * 60, close: 22 * 60},   // 7:00am – 10:00pm
+                sainikpuri: { open: 8 * 60, close: 22 * 60}  // 8:00am – 10:00pm
+            };
+
             function setStatus() {
                 const now = new Date();
                 const mins = now.getHours() * 60 + now.getMinutes();
 
-                const OPEN = 10 * 60;    // 10:00 = 600
-                const CLOSE = 23 * 60;   // 23:00 = 1380
-
                 document.querySelectorAll(".open-status").forEach(el => {
-                    let html = "";
+                    // Find location key on the element or its nearest ancestor
+                    const key =
+                        el.dataset.location ||
+                        el.closest("[data-location]")?.getAttribute("data-location") ||
+                        null;
 
+                    // Fallback: if no key found, assume Jubilee hours
+                    const OPEN = (key && HOURS[key] ? HOURS[key].open : HOURS.jubilee.open);
+                    const CLOSE = (key && HOURS[key] ? HOURS[key].close : HOURS.jubilee.close);
+
+                    let html = "";
                     if (mins < OPEN) {
-                        html = `<i data-lucide="circle" class="h-2 w-2 text-gray-400"></i><span>Opens at 10 am</span>`;
+                        html = `<i data-lucide="circle" class="h-2 w-2 text-gray-400"></i><span>Opens at ${fmtLabel(OPEN)}</span>`;
                     } else if (mins >= OPEN && mins < CLOSE - 30) {
-                        html = `<i data-lucide="circle" class="h-2 w-2 text-emerald-500"></i><span>Open • Closes 11 pm</span>`;
+                        html = `<i data-lucide="circle" class="h-2 w-2 text-emerald-500"></i><span>Open • Closes ${fmtLabel(CLOSE)}</span>`;
                     } else if (mins >= CLOSE - 30 && mins < CLOSE) {
-                        html = `<i data-lucide="circle" class="h-2 w-2 text-amber-500"></i><span>Closes Soon • 11 pm</span>`;
+                        html = `<i data-lucide="circle" class="h-2 w-2 text-amber-500"></i><span>Closes soon • ${fmtLabel(CLOSE)}</span>`;
                     } else {
-                        html = `<i data-lucide="circle" class="h-2 w-2 text-red-500"></i><span>Closed • Opens 10 am</span>`;
+                        html = `<i data-lucide="circle" class="h-2 w-2 text-red-500"></i><span>Closed • Opens ${fmtLabel(OPEN)}</span>`;
                     }
 
                     el.innerHTML = html;
-                    // Ensure perfect single-line centering even if HTML classes change
                     el.classList.add("inline-flex", "items-center", "gap-1", "whitespace-nowrap", "justify-center");
                 });
 
@@ -59,10 +77,12 @@
             } else {
                 setStatus();
             }
-
             setInterval(setStatus, 60 * 1000);
         })();
     </script>
+
+
+
     <script>
         // --- Nearest location label (geolocation + haversine) ---
         (function () {
@@ -343,7 +363,7 @@
                         </div>
 
                         <!-- Sainikpuri -->
-                        <div data-location="jubilee"
+                        <div data-location="sainikpuri"
                             class="flex items-center justify-between gap-2 px-3 py-2.5 text-[13px] text-brand-900 hover:bg-cream-50">
                             <a href="https://maps.app.goo.gl/5JTTaSVYKqfzrNR16" target="_blank"
                                 class="flex flex-col gap-0.5 min-w-0">
@@ -456,7 +476,7 @@
 
                     <!-- STATUS (modified) -->
                     <div class="mt-1 text-[12px] text-brand-900/70 flex items-start justify-start">
-                        <span class="open-status inline-flex items-center gap-1">
+                        <span class="open-status inline-flex items-center gap-1" data-location="jubilee">
                             <i data-lucide="circle" class="h-2 w-2 text-gray-400"></i>
                             <span>Loading...</span>
                         </span>
@@ -508,7 +528,7 @@
 
                     <!-- STATUS (modified) -->
                     <div class="mt-1 text-[12px] text-brand-900/70 flex items-start justify-start">
-                        <span class="open-status flex items-center gap-1">
+                        <span class="open-status flex items-center gap-1" data-location="sainikpuri">
                             <i data-lucide="circle" class="h-2 w-2 text-gray-400"></i>
                             <span>Loading...</span>
                         </span>
@@ -529,7 +549,8 @@
                             class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200 snap-start">
                             <i data-lucide="utensils" class="h-4 w-4"></i> Order Ahead
                         </a>
-                        <a href="https://search.google.com/local/writereview?placeid=ChIJiXxX6t-byzsR4BpBTGPDtTs" target="_blank" rel="noopener"
+                        <a href="https://search.google.com/local/writereview?placeid=ChIJiXxX6t-byzsR4BpBTGPDtTs"
+                            target="_blank" rel="noopener"
                             class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-50 hover:bg-brand-100 px-4 py-1.5 text-[11px] font-medium ring-1 ring-brand-200 snap-start">
                             <i data-lucide="star" class="h-4 w-4"></i> Leave a Review
                         </a>
@@ -1050,7 +1071,8 @@
             </div>
             <p class="text-[12px] text-brand-900/70 px-1"
                 style="animation: fadeIn .6s ease-out both; animation-delay: .24s;">
-                Want us to feature your photo? Tag <a href="https://instagram.com/mikrocoffee_" class="text-brand-900/90 text-bold">@mikrocoffee_</a> in your story or post!
+                Want us to feature your photo? Tag <a href="https://instagram.com/mikrocoffee_"
+                    class="text-brand-900/90 text-bold">@mikrocoffee_</a> in your story or post!
             </p>
 
             <div class="columns-2 gap-2 [column-fill:_balance]"
