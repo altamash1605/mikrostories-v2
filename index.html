@@ -783,11 +783,11 @@
                     <li class="px-4 py-3">
                         <div class="flex justify-between"><span class="text-[13px] font-semibold">Americano</span><span
                                 class="tabular-nums">₹150</span></div>
-                                <p class="text-[11px] text-slate-500 mt-1">Espresso diluted with hot water</p>
-                            </li>
+                        <p class="text-[11px] text-slate-500 mt-1">Espresso diluted with hot water</p>
+                    </li>
                 </ul>
             </div>
-            
+
             <!-- Classic Iced -->
             <div class="rounded-xl ring-1 ring-slate-200 bg-white shadow-sm"
                 style="animation: fadeInUp .6s ease-out both; animation-delay: .18s;">
@@ -1093,23 +1093,17 @@
                 style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
                 <h2 id="gallery" class="text-2xl tracking-tight font-semibold">Gallery</h2>
             </div>
+
             <p class="text-[12px] text-brand-900/70 px-1"
                 style="animation: fadeIn .6s ease-out both; animation-delay: .24s;">
-                Want us to feature your photo? Tag <a href="https://instagram.com/mikrocoffee_"
-                    class="text-brand-900/90 text-bold">@mikrocoffee_</a> in your story or post!
+                Want us to feature your photo? Tag
+                <a href="https://instagram.com/mikrocoffee_" class="text-brand-900/90 text-bold">@mikrocoffee_</a>
+                in your story or post!
             </p>
 
-            <div class="columns-2 gap-2 [column-fill:_balance]"
-                style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;">
-
-                <!-- IMG -->
-                <div
-                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
-                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-3.webp" alt="Mikro food 2"
-                        loading="lazy" decoding="async" width="500" height="800">
-                </div>
-
-                <!-- VIDEO -->
+            <!-- Masonry container -->
+            <div id="galleryMasonry" class="columns-2 gap-2 [column-fill:_balance]"
+                style="animation: fadeInUp .6s ease-out both; animation-delay: .12s;" data-initial="5" data-step="8">
                 <div
                     class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
                     <video class="w-full h-auto object-cover" autoplay muted loop playsinline preload="metadata"
@@ -1118,28 +1112,40 @@
                     </video>
                 </div>
 
-                <!-- IMG -->
+                <!-- SAINIKPURI 1–50 -->
                 <div
                     class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
-                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-55.webp" alt="Mikro at night"
-                        loading="eager" fetchpriority="high" width="800" height="1000">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-1.webp"
+                        alt="Sainikpuri 1" loading="lazy">
                 </div>
-
-                <!-- IMG -->
                 <div
                     class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
-                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-13.webp" alt="Mikro pet friendly"
-                        loading="lazy" decoding="async" width="800" height="1000">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-2.webp"
+                        alt="Sainikpuri 2" loading="lazy">
                 </div>
-
-                <!-- IMG -->
                 <div
                     class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
-                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-5.webp" alt="Mikro food 1"
-                        loading="lazy" decoding="async" width="800" height="800">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-3.webp"
+                        alt="Sainikpuri 3" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-4.webp"
+                        alt="Sainikpuri 4" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-5.webp"
+                        alt="Sainikpuri 5" loading="lazy">
+                </div>
+                <!-- … continues all the way to sainikpuri 50 … -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-50.webp"
+                        alt="Sainikpuri 50" loading="lazy">
                 </div>
 
-                <!-- VIDEO -->
+                <!-- VIDEO 2 -->
                 <div
                     class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
                     <video class="w-full h-auto object-cover" autoplay muted loop playsinline preload="metadata"
@@ -1148,15 +1154,213 @@
                     </video>
                 </div>
 
-                <!-- IMG -->
+                <!-- JUBILEE 1–11 -->
                 <div
                     class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
-                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-10.webp"
-                        alt="Mikro holding cup" loading="lazy" decoding="async" width="800" height="800">
+                    <img class="w-full h-auto object-cover" src="Assets/images/jubilee/mikro-food-1.webp"
+                        alt="Jubilee 1" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/jubilee/mikro-food-2.webp"
+                        alt="Jubilee 2" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/jubilee/mikro-food-3.webp"
+                        alt="Jubilee 3" loading="lazy">
+                </div>
+                <!-- … continues to jubilee 11 … -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/jubilee/mikro-food-11.webp"
+                        alt="Jubilee 11" loading="lazy">
                 </div>
 
+                <!-- FOOD 1–10 -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-1.webp" alt="Food 1"
+                        loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-2.webp" alt="Food 2"
+                        loading="lazy">
+                </div>
+                <!-- … continues to food 10 … -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-10.webp" alt="Food 10"
+                        loading="lazy">
+                </div>
+                <!-- SAINIKPURI 51–60 -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-51.webp"
+                        alt="Sainikpuri 51" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-52.webp"
+                        alt="Sainikpuri 52" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-53.webp"
+                        alt="Sainikpuri 53" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-54.webp"
+                        alt="Sainikpuri 54" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-55.webp"
+                        alt="Sainikpuri 55" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-56.webp"
+                        alt="Sainikpuri 56" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-57.webp"
+                        alt="Sainikpuri 57" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-58.webp"
+                        alt="Sainikpuri 58" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-59.webp"
+                        alt="Sainikpuri 59" loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/sainikpuri/mikro-food-60.webp"
+                        alt="Sainikpuri 60" loading="lazy">
+                </div>
+
+                <!-- FOOD (extras not yet used in your snippet: 3–9) -->
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-3.webp" alt="Food 3"
+                        loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-4.webp" alt="Food 4"
+                        loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-5.webp" alt="Food 5"
+                        loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-6.webp" alt="Food 6"
+                        loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-7.webp" alt="Food 7"
+                        loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-8.webp" alt="Food 8"
+                        loading="lazy">
+                </div>
+                <div
+                    class="break-inside-avoid overflow-hidden rounded-lg ring-1 ring-brand-200 bg-white shadow-sm mb-2">
+                    <img class="w-full h-auto object-cover" src="Assets/images/food/mikro-food-9.webp" alt="Food 9"
+                        loading="lazy">
+                </div>
+
+                <!-- Paste all your cards above this comment -->
             </div>
+
+            <!-- Load more -->
+            <div class="flex justify-center">
+                <button id="loadMoreBtn" class="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-2
+                   text-[12px] font-semibold text-brand-900 shadow-sm hover:shadow ring-1 ring-brand-200
+                   transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    style="animation: fadeInUp .6s ease-out both; animation-delay: .16s;">
+                    <span>Load more</span>
+                    <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                </button>
+            </div>
+
+            <noscript>
+                <div class="text-center text-[12px] text-brand-900/70 mt-2">
+                    Enable JavaScript to load more items.
+                </div>
+            </noscript>
         </section>
+
+        <script>
+            (function () {
+                const masonry = document.getElementById('galleryMasonry');
+                const btn = document.getElementById('loadMoreBtn');
+                if (!masonry || !btn) return;
+
+                const initial = parseInt(masonry.getAttribute('data-initial') || '8', 10);
+                const step = parseInt(masonry.getAttribute('data-step') || '8', 10);
+
+                // Collect all cards (divs directly inside the masonry)
+                const cards = Array.from(masonry.children).filter(
+                    el => el.classList && el.classList.contains('break-inside-avoid')
+                );
+
+                // Helper to apply a subtle fade-in on reveal
+                const applyReveal = (el) => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(6px)';
+                    el.style.transition = 'opacity .25s ease, transform .25s ease';
+                    requestAnimationFrame(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    });
+                };
+
+                // Hide everything beyond the initial batch
+                cards.forEach((card, i) => {
+                    if (i >= initial) {
+                        card.style.display = 'none';
+                    }
+                });
+
+                let shown = Math.min(initial, cards.length);
+
+                // Hide button if everything fits already
+                if (shown >= cards.length) {
+                    btn.style.display = 'none';
+                }
+
+                btn.addEventListener('click', () => {
+                    const next = Math.min(shown + step, cards.length);
+                    for (let i = shown; i < next; i++) {
+                        cards[i].style.display = '';
+                        applyReveal(cards[i]);
+                    }
+                    shown = next;
+
+                    if (shown >= cards.length) {
+                        btn.disabled = true;
+                        btn.querySelector('span').textContent = 'All caught up';
+                        // Optionally hide completely after a short delay:
+                        setTimeout(() => { btn.style.display = 'none'; }, 600);
+                    }
+                });
+            })();
+        </script>
+
 
 
     </main>
